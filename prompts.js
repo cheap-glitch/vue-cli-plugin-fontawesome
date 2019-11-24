@@ -3,52 +3,54 @@
  * vue-cli-plugin-fontawesome/prompts.js
  */
 
-module.exports = [
-	{
-		type:	 'checkbox',
-		name:	 'iconSets',
+module.exports = [{
+	type:	  'checkbox',
+	name:	  'iconSets',
+	pageSize: 8,
 
-		message: 'Which icon sets do you want to use? '
-		       + '(Note: you can always add more later by manually '
-		       + 'adding them to the dependencies in package.json)',
+	message: 'Which icon sets do you want to use?\n'
+	       + ' (Note: you can always add more later by manually adding them to the dependencies in package.json)\n',
 
-		choices: [
-			new inquirer.Separator('Free icon sets'),
-			{
-				name:  'Solid',
-				value: 'solid-free',
-			},
-			new inquirer.Separator('Pro icon sets (subscription needed)'),
-			{
-				name:  'Light',
-				value: 'light',
-			},
-			{
-				name:  'Regular',
-				value: 'regular',
-			},
-			{
-				name:  'Solid',
-				value: 'solid-pro',
-			},
-			{
-				name:  'Duotone',
-				value: 'duotone',
-			},
-			new inquirer.Separator('Brand icon sets'),
-			{
-				name:  'Brands',
-				value: 'brands',
-			},
-		],
-		default: [],
-
-		filter()
+	choices: [
 		{
-			// Remove the free solid set if the pro one is also selected
-			return (_input.includes('solid') && _input.includes('solid-free'))
-				? _input.filter(_v => _v !== 'solid-free')
-				: _input;
+			type:  'separator',
+			line:  '───── Free icon sets ─────',
 		},
-	}
-];
+		{
+			name:  'Solid',
+			value: 'free-solid',
+		},
+		{
+			name:  'Brands',
+			value: 'free-brands',
+		},
+		{
+			type:  'separator',
+			line:  '───── Pro icon sets ─────',
+		},
+		{
+			name:  'Light',
+			value: 'pro-light',
+		},
+		{
+			name:  'Regular',
+			value: 'pro-regular',
+		},
+		{
+			name:  'Solid',
+			value: 'pro-solid',
+		},
+		{
+			name:  'Duotone',
+			value: 'pro-duotone',
+		},
+	],
+
+	filter(_input)
+	{
+		// Remove the free solid set if the pro one is also selected
+		return (_input.includes('free-solid') && _input.includes('pro-solid'))
+			? _input.filter(_v => _v !== 'free-solid')
+			: _input;
+	},
+}];

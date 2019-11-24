@@ -1,27 +1,26 @@
 
 /**
- * vue-cli-plugin-fontawesome/index.js
+ * vue-cli-plugin-fontawesome
  * A Vue CLI 3 plugin to import Font Awesome icons easily
  *
  * Copyright 2019 cheap-glitch
  *
- * Permission to use, copy, modify, and/or distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
+ * Permission  to use,  copy, modify,  and/or distribute  this software  for any
+ * purpose  with or  without  fee is  hereby granted,  provided  that the  above
  * copyright notice and this permission notice appear in all copies.
  *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
- * FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
- * DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
- * WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
- * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
- * OF THIS SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+ * REGARD TO THIS  SOFTWARE INCLUDING ALL IMPLIED  WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS. IN NO EVENT SHALL THE  AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+ * INDIRECT, OR CONSEQUENTIAL  DAMAGES OR ANY DAMAGES  WHATSOEVER RESULTING FROM
+ * LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+ * OTHER  TORTIOUS ACTION,  ARISING OUT  OF  OR IN  CONNECTION WITH  THE USE  OR
+ * PERFORMANCE OF THIS SOFTWARE.
  */
 
 const InjectPlugin = require('webpack-inject-plugin').default;
 
-module.exports = class VueCLIFontAwesomePlugin
+class VueCLIFontAwesomePlugin
 {
 	constructor(_options)
 	{
@@ -133,13 +132,14 @@ module.exports = class VueCLIFontAwesomePlugin
 		})
 		.apply(_compiler);
 	}
+
+	die(_msg)
+	{
+		// Output an error message and stop the current process
+		console.error(`[vue-cli-plugin-fontawesome]: ERROR: ${_msg}`);
+		process.exit(1);
+	}
 }
 
-/**
- * Output an error message and stop the current process
- */
-function die(_msg)
-{
-	console.error(`[vue-cli-plugin-fontawesome]: ERROR: ${_msg}`);
-	process.exit(1);
-}
+// Inject an instance of the plugin in the webpack config
+module.exports = (_api, _options) => _api.configureWebpack({ plugins: [new VueCLIFontAwesomePlugin(_options.pluginOptions.fontawesome || {})] });
