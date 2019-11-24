@@ -35,7 +35,7 @@ module.exports = {
 
 		fontawesome: {
 			// Defines the name of the Font Awesome component
-			// inside Vue templates (optional, defaults to 'fa')
+			// used inside Vue templates (optional, defaults to 'fa')
 			component: 'fa-icon',
 
 			// Lists the imported icons
@@ -74,9 +74,8 @@ module.exports = {
 					]
 				},
 				// Specifying only a name will load the entire icon set
-				// WARNING: This is only suitable for the prototyping phase,
-				//          as every single icon in the set will be included
-				//          in the final bundle!
+				// WARNING: This is only suitable for the prototyping phase, as every
+				//          single icon in the set will be included in the final bundle!
 				'pro-light',
 			]
 		}
@@ -86,7 +85,7 @@ module.exports = {
 ```
 
 You can then use the Font Awesome component in your templates. For more info,
-see [here](https://github.com/FortAwesome/vue-fontawesome#the-icon-property).
+see [here](https://github.com/FortAwesome/vue-fontawesome#usage).
 
 ## Acknowledgements
 This plugin is heavily inspired by its Nuxt.js counterpart,
