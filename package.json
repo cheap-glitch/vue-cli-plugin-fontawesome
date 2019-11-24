@@ -1,12 +1,24 @@
 {
-  "name": "vue-cli-plugin-fontawesome",
+  "name": "@cheap-glitch/vue-cli-plugin-fontawesome",
   "version": "1.0.0",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cheap-glitch/vue-cli-plugin-fontawesome.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cheap-glitch/vue-cli-plugin-fontawesome/issues"
+  },
+  "author": "cheap-glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
   "description": "A Vue CLI 3 plugin to import Font Awesome icons easily",
+  "homepage": "https://github.com/cheap-glitch/vue-cli-plugin-fontawesome#readme",
   "keywords": [
     "vue-cli-plugin",
     "fontawesome"
   ],
-  "author": "cheap-glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
-  "license": "ISC",
-  "main": "index.js"
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "webpack-inject-plugin": "^1.5.3"
+  }
 }
