@@ -13,8 +13,12 @@
   "description": "A Vue CLI 3 plugin to import Font Awesome icons easily",
   "homepage": "https://github.com/cheap-glitch/vue-cli-plugin-fontawesome#readme",
   "keywords": [
+    "vue",
+    "vue-cli",
+    "vue-cli-3",
     "vue-cli-plugin",
-    "fontawesome"
+    "fontawesome",
+    "vue-fontawesome"
   ],
   "main": "index.js",
   "scripts": {},
