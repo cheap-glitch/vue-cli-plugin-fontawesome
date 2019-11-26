@@ -1,9 +1,11 @@
 
 /**
  * vue-cli-plugin-fontawesome
- * A Vue CLI 3 plugin to import Font Awesome icons easily
  *
- * Copyright 2019 cheap-glitch
+ * A tiny Vue CLI 3 plugin to import Font Awesome icons easily.
+ *
+ * Copyright (c) 2019-present, cheap glitch
+ *
  *
  * Permission  to use,  copy, modify,  and/or distribute  this software  for any
  * purpose  with or  without  fee is  hereby granted,  provided  that the  above
@@ -19,6 +21,11 @@
  */
 
 const InjectPlugin = require('webpack-inject-plugin').default;
+
+// Inject an instance of the plugin in the webpack config
+module.exports = (_api, _options) => _api.configureWebpack({
+	plugins: [new VueCLIFontAwesomePlugin(_options.pluginOptions.fontawesome || _options.fontawesome || {})]
+});
 
 class VueCLIFontAwesomePlugin
 {
@@ -56,6 +63,24 @@ class VueCLIFontAwesomePlugin
 
 			if (_import.icons.some(_iconName => typeof _iconName != 'string'))
 				die('Values in array "icons" must be strings');
+		});
+
+		// Test that the name of the components, sets and icons are valid
+		if (this.options.component.match(/[^a-zA-Z0-9-_]/))
+			die(`Invalid component name: "${this.options.component}"`);
+		this.options.imports.forEach(function(_import)
+		{
+			if ((typeof _import == 'string' ? _import : _import.set).match(/[^a-z@/-]/))
+				die(`Invalid set name: "${_import.set}"`);
+
+			if (typeof _import != 'string')
+			{
+				_import.icons.forEach(function(_icon)
+				{
+					if (_icon.match(/[^a-zA-Z -]/))
+						die(`Invalid icon name: "${_icon}"`);
+				});
+			}
 		});
 	}
 
@@ -132,14 +157,13 @@ class VueCLIFontAwesomePlugin
 		})
 		.apply(_compiler);
 	}
-
-	die(_msg)
-	{
-		// Output an error message and stop the current process
-		console.error(`[vue-cli-plugin-fontawesome]: ERROR: ${_msg}`);
-		process.exit(1);
-	}
 }
 
-// Inject an instance of the plugin in the webpack config
-module.exports = (_api, _options) => _api.configureWebpack({ plugins: [new VueCLIFontAwesomePlugin(_options.pluginOptions.fontawesome || {})] });
+/**
+ * Output an error message and stop the current process
+ */
+function die(_msg)
+{
+	console.error(`[vue-cli-plugin-fontawesome]: ERROR: ${_msg}`);
+	process.exit(1);
+}

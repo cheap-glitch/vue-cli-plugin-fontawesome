@@ -1,3 +1,5 @@
+<img align="right" src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/logo-wide.png" alt="Logo">
+
 # vue-cli-plugin-fontawesome
 
 Using [Font Awesome  5](https://fontawesome.com) in a Vue.js  project is already
@@ -87,6 +89,9 @@ module.exports = {
 
 You can then  use the Font Awesome  component in your templates.  For more info,
 see [here](https://github.com/FortAwesome/vue-fontawesome#usage).
+
+## Changelog
+See the full changelog [here](https://github.com/cheap-glitch/vue-cli-plugin-fontawesome/releases).
 
 ## Acknowledgements
 This plugin depends on the awesome [webpack-inject-plugin](https://github.com/adierkens/webpack-inject-plugin).
