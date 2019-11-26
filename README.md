@@ -2,7 +2,7 @@
 	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/logo-wide.png" alt="Logo">
 </p>
 
-# vue-cli-plugin-fontawesome
+<div align="center"><h1>vue-cli-plugin-fontawesome</h1></div>
 
 Using [Font Awesome  5](https://fontawesome.com) in a Vue.js  project is already
 pretty simple, but you  still have to work with a  verbose and repetitive syntax
