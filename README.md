@@ -1,4 +1,4 @@
-<img align="right" src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/logo-wide.png" alt="Logo">
+<img align="center" src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/logo-wide.png" alt="Logo">
 
 # vue-cli-plugin-fontawesome
 
