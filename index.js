@@ -34,18 +34,28 @@ class VueCLIFontAwesomePlugin
 		this.options = _options;
 
 		// Set the default options
-		if ('component'  in _options === false) this.options.component = 'fa';
-		if ('components' in _options === false) this.options.component = 'fa';
-		if ('imports'    in _options === false) this.options.imports   = [];
+		if ('component'  in _options === false) this.options.component  = 'fa';
+		if ('components' in _options === false) this.options.components = {};
+		if ('imports'    in _options === false) this.options.imports    = [];
 
-		// Check options types
+		/**
+		 * Check options types
+		 * -------------------------------------------------------------
+		 */
+
 		if (typeof this.options.component != 'string')
 			die('Property "component" must be a string');
+		if (!isObject(this.options.components))
+			die('Property "components" must be an object');
 		if (!Array.isArray(this.options.imports))
 			die('Property "imports" must be an array');
 
+		// Check that the properties of 'components' are all strings
+		if (Object.keys(this.options.components).some(_key => typeof this.options.components[_key] != 'string'))
+			die('Values of object "components" must be strings');
+
 		// Check that the every import parameter is either a string or a proper object
-		if (this.options.imports.some(_import => (typeof _import != 'string' && _import !== Object(_import))))
+		if (this.options.imports.some(_import => (typeof _import != 'string' && !isObject(_import))))
 			die('Values in array "imports" must be strings or objects');
 
 		// If the an import parameter is an object, check that
@@ -66,9 +76,21 @@ class VueCLIFontAwesomePlugin
 				die('Values in array "icons" must be strings');
 		});
 
-		// Test that the name of the components, sets and icons are valid
+		/**
+		 * Check options values
+		 * -------------------------------------------------------------
+		 */
+
+		// Check that the names of the components are valid
 		if (this.options.component.match(/[^a-zA-Z0-9-_]/))
 			die(`Invalid component name: "${this.options.component}"`);
+
+		Object.keys(this.options.components).forEach(_key => {
+			if (this.options.components[_key].match(/[^a-zA-Z0-9-_]/))
+				die(`Invalid component name: "${this.options.components[_key]}"`);
+		});
+
+		// Check that the names of the set and icons are valid
 		this.options.imports.forEach(function(_import)
 		{
 			if ((typeof _import == 'string' ? _import : _import.set).match(/[^a-z@/-]/))
@@ -91,10 +113,28 @@ class VueCLIFontAwesomePlugin
 		{
 			if (this.options.imports.length == 0) return '';
 
+			// Build the import list for the components
+			const components     = ['FontAwesomeIcon'];
+			const componentNames = { FontAwesomeIcon: this.options.component };
+			if ('icon' in this.options.components === true)
+			{
+				componentNames.FontAwesomeIcon = this.options.components.icon;
+			}
+			if ('layers' in this.options.components === true)
+			{
+				components.push('FontAwesomeLayers');
+				componentNames.FontAwesomeLayers = this.options.components.layers;
+			}
+			if ('layersText' in this.options.components === true)
+			{
+				components.push('FontAwesomeLayersText');
+				componentNames.FontAwesomeLayersText = this.options.components.layersText;
+			}
+
 			// List of all the icon aliases to register
 			const registrationList = [];
 
-			// Build the import list for each set
+			// Build the import list for each set of icons
 			const imports = this.options.imports.map(function(_import)
 			{
 				let setPrefix = 'fa';
@@ -146,11 +186,11 @@ class VueCLIFontAwesomePlugin
 			});
 
 			return `
-				import Vue                 from 'vue';
-				import { library }         from '@fortawesome/fontawesome-svg-core';
-				import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+				import Vue from 'vue';
+				import { library } from '@fortawesome/fontawesome-svg-core';
+				import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome';
 
-				Vue.component('${this.options.component}', FontAwesomeIcon);
+				${components.map(_component => `Vue.component('${componentNames[_component]}', ${_component});` ).join('\n')}
 				${imports.join('\n')}
 				library.add(${registrationList.join(', ')});
 			`
@@ -158,6 +198,14 @@ class VueCLIFontAwesomePlugin
 		})
 		.apply(_compiler);
 	}
+}
+
+/**
+ * Check if a value is an associative object
+ */
+function isObject(_value)
+{
+	return (_value && Object.prototype.toString.call(_value) === '[object Object]');
 }
 
 /**
