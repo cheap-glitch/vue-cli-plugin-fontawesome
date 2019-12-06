@@ -37,11 +37,20 @@ No other file will be modified during the installation process.
 
 module.exports = {
 	pluginOptions: {
+		// […]
 
 		fontawesome: {
 			// Defines the name of the Font Awesome component
 			// used inside Vue templates (optional, defaults to 'fa')
 			component: 'fa-icon',
+
+			// Defines the names of all the Font Awesome
+			// components that will be imported (optional)
+			components: {
+				icon:       'fa-icon',
+				layers:     'fa-layers',
+				layersText: 'fa-layers-text',
+			}
 
 			// Lists the imported icons
 			imports: [
@@ -84,7 +93,6 @@ module.exports = {
 				'pro-light',
 			]
 		}
-
 	}
 }
 ```
