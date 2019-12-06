@@ -50,7 +50,7 @@ module.exports = {
 				icon:       'fa-icon',
 				layers:     'fa-layers',
 				layersText: 'fa-layers-text',
-			}
+			},
 
 			// Lists the imported icons
 			imports: [
