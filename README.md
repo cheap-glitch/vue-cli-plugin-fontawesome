@@ -65,7 +65,7 @@ module.exports = {
 						// You can also use the kebab case version of the name
 						'spider-black-widow',
 
-						// You can even specifiy the name with spaces
+						// You can even specify the name with spaces
 						'dumpster fire',
 					]
 				},

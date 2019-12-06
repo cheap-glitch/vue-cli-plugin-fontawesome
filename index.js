@@ -34,8 +34,9 @@ class VueCLIFontAwesomePlugin
 		this.options = _options;
 
 		// Set the default options
-		if ('component' in _options === false) this.options.component = 'fa';
-		if ('imports'   in _options === false) this.options.imports   = [];
+		if ('component'  in _options === false) this.options.component = 'fa';
+		if ('components' in _options === false) this.options.component = 'fa';
+		if ('imports'    in _options === false) this.options.imports   = [];
 
 		// Check options types
 		if (typeof this.options.component != 'string')
@@ -101,12 +102,12 @@ class VueCLIFontAwesomePlugin
 
 				switch (setName)
 				{
-					case 'free-brands':	setPrefix = 'fab'; break;
-					case 'free-solid':	setPrefix = 'fas'; break;
-					case 'pro-duotone':	setPrefix = 'fad'; break;
-					case 'pro-light':	setPrefix = 'fal'; break;
-					case 'pro-regular':	setPrefix = 'far'; break;
-					case 'pro-solid':	setPrefix = 'fas'; break;
+					case 'free-brands':  setPrefix = 'fab'; break;
+					case 'free-solid':   setPrefix = 'fas'; break;
+					case 'pro-duotone':  setPrefix = 'fad'; break;
+					case 'pro-light':    setPrefix = 'fal'; break;
+					case 'pro-regular':  setPrefix = 'far'; break;
+					case 'pro-solid':    setPrefix = 'fas'; break;
 
 					default: die(`Unknown icon set "${_import.set}"`);
 				}
@@ -145,8 +146,8 @@ class VueCLIFontAwesomePlugin
 			});
 
 			return `
-				import Vue		   from 'vue';
-				import { library }	   from '@fortawesome/fontawesome-svg-core';
+				import Vue                 from 'vue';
+				import { library }         from '@fortawesome/fontawesome-svg-core';
 				import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 				Vue.component('${this.options.component}', FontAwesomeIcon);

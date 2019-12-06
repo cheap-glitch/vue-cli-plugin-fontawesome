@@ -4,8 +4,9 @@
  */
 
 module.exports = [{
-	type:	  'checkbox',
-	name:	  'iconSets',
+	type: 'checkbox',
+	name: 'iconSets',
+
 	pageSize: 8,
 
 	message: 'Which icon sets do you want to use?\n'
@@ -14,7 +15,7 @@ module.exports = [{
 	choices: [
 		{
 			type:  'separator',
-			line:  '───── Free icon sets ─────',
+			line:  '────────── Free icon sets ──────────',
 		},
 		{
 			name:  'Solid',
@@ -26,7 +27,7 @@ module.exports = [{
 		},
 		{
 			type:  'separator',
-			line:  '───── Pro icon sets ─────',
+			line:  '─────────── Pro icon sets ──────────',
 		},
 		{
 			name:  'Light',
