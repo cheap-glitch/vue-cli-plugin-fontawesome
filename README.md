@@ -100,6 +100,22 @@ module.exports = {
 You can then  use the Font Awesome  component in your templates.  For more info,
 see [here](https://github.com/FortAwesome/vue-fontawesome#usage).
 
+### Automatically rebuild when `vue.config.js` is modified
+
+Unfortunately,   Vue  CLI   doesn't   watch  edits   made  on   `vue.config.js`.
+To    get    automatic    rebuilds,    you    can    use    a    watcher    like
+[nodemon](https://www.npmjs.com/package/nodemon):
+```json
+{
+	"scripts": {
+		"serve": "nodemon --watch vue.config.js --exec npm run serve-vue-cli",
+		"serve-vue-cli": "vue-cli-service serve"
+	}
+}
+```
+Note that you'll still need to reload the page manually as the connection to the
+websocket will be lost.
+
 ## Changelog
 See the full changelog [here](https://github.com/cheap-glitch/vue-cli-plugin-fontawesome/releases).
 
@@ -109,4 +125,4 @@ This plugin depends on the awesome [webpack-inject-plugin](https://github.com/ad
 This plugin is heavily inspired by its Nuxt.js counterpart, [nuxt-fontawesome](https://github.com/vaso2/nuxt-fontawesome).
 
 ## License
-This project is licensed under the ISC license.
+This software is distributed under the ISC license.
