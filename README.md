@@ -100,7 +100,7 @@ module.exports = {
 You can then  use the Font Awesome  component in your templates.  For more info,
 see [here](https://github.com/FortAwesome/vue-fontawesome#usage).
 
-### Automatically rebuild when `vue.config.js` is modified
+#### Automatically rebuild when `vue.config.js` is modified
 
 Unfortunately,   Vue  CLI   doesn't   watch  edits   made  on   `vue.config.js`.
 To    get    automatic    rebuilds,    you    can    use    a    watcher    like
