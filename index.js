@@ -20,6 +20,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
+const validator    = require('./validation');
 const InjectPlugin = require('webpack-inject-plugin').default;
 
 // Inject an instance of the plugin in the webpack config
@@ -38,73 +39,13 @@ class VueCLIFontAwesomePlugin
 		if ('components' in _options === false) this.options.components = {};
 		if ('imports'    in _options === false) this.options.imports    = [];
 
-		/**
-		 * Check options types
-		 * -------------------------------------------------------------
-		 */
-
-		if (typeof this.options.component != 'string')
-			die('Property "component" must be a string');
-		if (!isObject(this.options.components))
-			die('Property "components" must be an object');
-		if (!Array.isArray(this.options.imports))
-			die('Property "imports" must be an array');
-
-		// Check that the properties of 'components' are all strings
-		if (Object.keys(this.options.components).some(_key => typeof this.options.components[_key] != 'string'))
-			die('Values of object "components" must be strings');
-
-		// Check that the every import parameter is either a string or a proper object
-		if (this.options.imports.some(_import => (typeof _import != 'string' && !isObject(_import))))
-			die('Values in array "imports" must be strings or objects');
-
-		// If the an import parameter is an object, check that
-		// it has the two required values and that they are of the right type
-		this.options.imports.forEach(function(_import)
+		// Validate the options object
+		let error;
+		if ((error = validator(this.options)) !== null)
 		{
-			if (typeof _import == 'string') return;
-
-			if ('set' in _import === false || 'icons' in _import === false)
-				die('Objects in array "imports" must have properties "set" and "icons"');
-
-			if (typeof _import.set != 'string')
-				die('Property "set" of import object must be a string');
-			if (!Array.isArray(_import.icons))
-				die('Property "icons" of import object must be an array');
-
-			if (_import.icons.some(_iconName => typeof _iconName != 'string'))
-				die('Values in array "icons" must be strings');
-		});
-
-		/**
-		 * Check options values
-		 * -------------------------------------------------------------
-		 */
-
-		// Check that the names of the components are valid
-		if (this.options.component.match(/[^a-zA-Z0-9-_]/))
-			die(`Invalid component name: "${this.options.component}"`);
-
-		Object.keys(this.options.components).forEach(_key => {
-			if (this.options.components[_key].match(/[^a-zA-Z0-9-_]/))
-				die(`Invalid component name: "${this.options.components[_key]}"`);
-		});
-
-		// Check that the names of the set and icons are valid
-		this.options.imports.forEach(function(_import)
-		{
-			if ((typeof _import == 'string' ? _import : _import.set).match(/[^a-z@/-]/))
-				die(`Invalid set name: "${_import.set}"`);
-
-			if (typeof _import != 'string')
-			{
-				_import.icons.forEach(function(_icon)
-				{
-					if (_icon.match(/[^a-zA-Z -]/))
-						die(`Invalid icon name: "${_icon}"`);
-				});
-			}
-		});
+			console.error(`[vue-cli-plugin-fontawesome]: ${error.replace(/^data/, 'options')}`);
+			process.exit(1);
+		}
 	}
 
 	apply(_compiler)
@@ -148,8 +89,7 @@ class VueCLIFontAwesomePlugin
 					case 'pro-light':    setPrefix = 'fal'; break;
 					case 'pro-regular':  setPrefix = 'far'; break;
 					case 'pro-solid':    setPrefix = 'fas'; break;
-
-					default: die(`Unknown icon set "${_import.set}"`);
+					default:             setPrefix = 'fas'; break;
 				}
 
 				// If the import is a string, imports and register the entire icon set
@@ -198,21 +138,4 @@ class VueCLIFontAwesomePlugin
 		})
 		.apply(_compiler);
 	}
-}
-
-/**
- * Check if a value is an associative object
- */
-function isObject(_value)
-{
-	return (_value && Object.prototype.toString.call(_value) === '[object Object]');
-}
-
-/**
- * Output an error message and stop the current process
- */
-function die(_msg)
-{
-	console.error(`[vue-cli-plugin-fontawesome]: ERROR: ${_msg}`);
-	process.exit(1);
 }

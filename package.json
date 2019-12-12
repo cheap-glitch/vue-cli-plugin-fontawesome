@@ -23,6 +23,10 @@
   "main": "index.js",
   "scripts": {},
   "dependencies": {
+    "ajv": "^6.10.2",
     "webpack-inject-plugin": "^1.5.3"
+  },
+  "devDependencies": {
+    "eslint-plugin-smarter-tabs": "^1.0.0"
   }
 }
