@@ -6,9 +6,9 @@
 const AJV = require('ajv');
 
 /**
- * Test the options object against its validation schema
+ * Test the config object against its validation schema
  */
-module.exports = function(_data)
+module.exports = function(_config)
 {
 	const patternSetName       = '^(?:@fortawesome/)?(free-(brands|solid)|pro-(duotone|light|regular|solid))(?:-svg-icons)?$';
 	const patternIconName      = '^[a-zA-Z- ]+$';
@@ -83,5 +83,5 @@ module.exports = function(_data)
 	};
 
 	const validator = new AJV();
-	return !validator.validate(schema, _data) ? validator.errorsText() : null;
+	return !validator.validate(schema, _config) ? validator.errorsText() : null;
 }

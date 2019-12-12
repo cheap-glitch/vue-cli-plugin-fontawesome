@@ -20,28 +20,28 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-const validator    = require('./validation');
+const validate     = require('./validation');
 const InjectPlugin = require('webpack-inject-plugin').default;
 
 // Inject an instance of the plugin in the webpack config
-module.exports = (_api, _options) => _api.configureWebpack({
-	plugins: [new VueCLIFontAwesomePlugin(_options.pluginOptions.fontawesome || _options.fontawesome || {})]
+module.exports = (_api, _config) => _api.configureWebpack({
+	plugins: [new VueCLIFontAwesomePlugin(_config.pluginOptions.fontawesome || _config.fontawesome || {})]
 });
 
 class VueCLIFontAwesomePlugin
 {
-	constructor(_options)
+	constructor(_config)
 	{
-		this.options = _options;
+		this.options = _config;
 
 		// Set the default options
-		if ('component'  in _options === false) this.options.component  = 'fa';
-		if ('components' in _options === false) this.options.components = {};
-		if ('imports'    in _options === false) this.options.imports    = [];
+		if ('component'  in _config === false) this.options.component  = 'fa';
+		if ('components' in _config === false) this.options.components = {};
+		if ('imports'    in _config === false) this.options.imports    = [];
 
-		// Validate the options object
-		let error;
-		if ((error = validator(this.options)) !== null)
+		// Validate the config object
+		const error = validate(this.options);
+		if (error !== null)
 		{
 			console.error(`[vue-cli-plugin-fontawesome]: ${error.replace(/^data/, 'options')}`);
 			process.exit(1);
