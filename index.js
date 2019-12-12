@@ -126,9 +126,9 @@ class VueCLIFontAwesomePlugin
 			});
 
 			return `
-				import Vue from 'vue';
-				import { library } from '@fortawesome/fontawesome-svg-core';
-				import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome';
+				import Vue from 'vue'
+				import { library } from '@fortawesome/fontawesome-svg-core'
+				import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome'
 
 				${components.map(_component => `Vue.component('${componentNames[_component]}', ${_component});` ).join('\n')}
 				${imports.join('\n')}
