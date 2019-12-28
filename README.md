@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/logo-wide.png" alt="Logo">
+	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/docs/logo-wide.png" alt="logo">
 </p>
 
 <div align="center"><h1>vue-cli-plugin-fontawesome</h1></div>
@@ -113,8 +113,8 @@ To    get    automatic    rebuilds,    you    can    use    a    watcher    like
 	}
 }
 ```
-Note that you'll still need to reload the page manually as the connection to the
-websocket will be lost.
+Note  that you'll  still  need to  reload  the page  manually  as the  WebSocket
+connection with the local server will be lost.
 
 ## Changelog
 See the full changelog [here](https://github.com/cheap-glitch/vue-cli-plugin-fontawesome/releases).

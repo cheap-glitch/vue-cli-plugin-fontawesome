@@ -30,16 +30,11 @@ module.exports = (_api, _config) => _api.configureWebpack({
 
 class VueCLIFontAwesomePlugin
 {
-	constructor(_config)
+	constructor(_options)
 	{
-		this.options = _config;
+		this.options = _options;
 
-		// Set the default options
-		if ('component'  in _config === false) this.options.component  = 'fa';
-		if ('components' in _config === false) this.options.components = {};
-		if ('imports'    in _config === false) this.options.imports    = [];
-
-		// Validate the config object
+		// Validate the options object and set the defaults
 		const error = validate(this.options);
 		if (error !== null)
 		{

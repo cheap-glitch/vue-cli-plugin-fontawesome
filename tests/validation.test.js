@@ -1,14 +1,14 @@
 
 /**
- * test/validation.test.js
+ * tests/validation.test.js
  */
 
 const { expect } = require('chai');
 const validate   = require('../validation');
 
-describe('vue-cli-plugin-fontawesome config validation', () => {
+describe('vue-cli-plugin-fontawesome options validation', () => {
 
-	it("returns an error when there are extra properties on the main config object", () => {
+	it("returns an error when there are extra properties on the main options object", () => {
 		expect(validate({ foo: true })).not.to.be.null;
 		expect(validate({ component: 'fa-icon', foo: true })).not.to.be.null;
 	});
