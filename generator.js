@@ -7,7 +7,7 @@
 module.exports = function(_api, _options)
 {
 	const dependencies = {
-		'@fortawesome/vue-fontawesome':       '^0.1.8',
+		'@fortawesome/vue-fontawesome':       '^0.1.9',
 		'@fortawesome/fontawesome-svg-core':  '^1.2.26',
 	};
 

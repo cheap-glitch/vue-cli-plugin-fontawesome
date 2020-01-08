@@ -1,6 +1,6 @@
 {
   "name": "@cheap-glitch/vue-cli-plugin-fontawesome",
-  "description": "A tiny Vue CLI 3 plugin to import Font Awesome icons easily.",
+  "description": "A tiny Vue CLI plugin to import Font Awesome icons easily.",
   "version": "1.0.3",
   "license": "ISC",
   "repository": {
@@ -25,17 +25,19 @@
     "test": "tests"
   },
   "scripts": {
+    "lint": "eslint *.js tests/*.js",
     "test": "mocha tests/*.test.js",
-    "lint": "eslint *.js tests/*.js"
+    "coverage": "nyc npm test"
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "webpack-inject-plugin": "^1.5.3"
+    "webpack-inject-plugin": "^1.5.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-smarter-tabs": "^1.0.0",
-    "mocha": "^6.2.2"
+    "eslint": "^6.8.0",
+    "eslint-plugin-smarter-tabs": "^1.1.0",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0"
   }
 }

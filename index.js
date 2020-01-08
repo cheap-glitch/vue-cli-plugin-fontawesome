@@ -2,7 +2,7 @@
 /**
  * vue-cli-plugin-fontawesome
  *
- * A tiny Vue CLI 3 plugin to import Font Awesome icons easily.
+ * A tiny Vue CLI plugin to import Font Awesome icons easily.
  *
  * Copyright (c) 2019-present, cheap glitch
  *
