@@ -1,7 +1,7 @@
 {
   "name": "@cheap-glitch/vue-cli-plugin-fontawesome",
   "description": "A tiny Vue CLI plugin to import Font Awesome icons easily.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "ISC",
   "repository": {
     "type": "git",
