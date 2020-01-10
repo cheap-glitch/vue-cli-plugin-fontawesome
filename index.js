@@ -52,16 +52,16 @@ class VueCLIFontAwesomePlugin
 			// Build the import list for the components
 			const components     = ['FontAwesomeIcon'];
 			const componentNames = { FontAwesomeIcon: this.options.component };
-			if ('icon' in this.options.components === true)
+			if ('icon' in this.options.components)
 			{
 				componentNames.FontAwesomeIcon = this.options.components.icon;
 			}
-			if ('layers' in this.options.components === true)
+			if ('layers' in this.options.components)
 			{
 				components.push('FontAwesomeLayers');
 				componentNames.FontAwesomeLayers = this.options.components.layers;
 			}
-			if ('layersText' in this.options.components === true)
+			if ('layersText' in this.options.components)
 			{
 				components.push('FontAwesomeLayersText');
 				componentNames.FontAwesomeLayersText = this.options.components.layersText;

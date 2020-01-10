@@ -83,6 +83,6 @@ module.exports = function(_options)
 		additionalProperties: false,
 	};
 
-	const validator = new AJV();
+	const validator = new AJV({ useDefaults: true });
 	return !validator.validate(schema, _options) ? validator.errorsText() : null;
 }
