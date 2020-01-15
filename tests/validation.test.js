@@ -4,7 +4,7 @@
  */
 
 const { expect } = require('chai');
-const validate   = require('../validation');
+const validate   = require('../src/validation');
 
 describe('vue-cli-plugin-fontawesome options validation', () => {
 

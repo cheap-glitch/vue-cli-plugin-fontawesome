@@ -1,6 +1,6 @@
 
 /**
- * vue-cli-plugin-fontawesome/validation.js
+ * src/validation.js
  */
 
 const AJV = require('ajv');
