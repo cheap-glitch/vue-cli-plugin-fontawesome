@@ -3,6 +3,9 @@
 </p>
 
 <div align="center"><h1>vue-cli-plugin-fontawesome</h1></div>
+![license badge](https://badgen.net/badge/license/ISC/green)
+![latest release badge](https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green)
+[![codecov badge](https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg)](https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome)
 
 Using [Font Awesome  5](https://fontawesome.com) in a Vue.js  project is already
 pretty simple, but you  still have to work with a  verbose and repetitive syntax
@@ -35,65 +38,62 @@ No other file will be modified during the installation process.
 ```javascript
 // vue.config.js
 
-module.exports = {
-	pluginOptions: {
-		// […]
+// The config object should be placed inside 'pluginOptions'
+fontawesome: {
 
-		fontawesome: {
-			// Defines the name of the Font Awesome component
-			// used inside Vue templates (optional, defaults to 'fa')
-			component: 'fa-icon',
+	// Defines the name of the Font Awesome component
+	// used inside Vue templates (optional, defaults to 'fa')
+	component: 'fa-icon',
 
-			// Defines the names of all the Font Awesome
-			// components that will be imported (optional)
-			components: {
-				icon:       'fa-icon',
-				layers:     'fa-layers',
-				layersText: 'fa-layers-text',
-			},
+	// Defines the names of all the Font Awesome
+	// components that will be imported (optional)
+	components: {
+		icon:       'fa-icon',
+		layers:     'fa-layers',
+		layersText: 'fa-layers-text',
+	},
 
-			// Lists the imported icons
-			imports: [
-				{
-					set: '@fortawesome/free-solid-svg-icons',
-					icons: [
-						'faUser',
-						'faFileUpload',
-						'faFrenchFries',
-					]
-				},
-				{
-					// You can omit the '@fortawesome/' prefix in the set name
-					set: 'pro-duotone-svg-icons',
-					icons: [
-						// You can omit the 'fa' prefix in the icon names
-						'guitar',
-						'fax',
-						'fastForward',
-
-						// You can also use the kebab case version of the name
-						'spider-black-widow',
-
-						// You can even specify the name with spaces
-						'dumpster fire',
-					]
-				},
-				{
-					// You can also omit the '-svg-icons' suffix in the set name
-					set: 'free-brands',
-					icons: [
-						'faVuejs',
-						'creative-commons'
-						'Fort Awesome',
-					]
-				},
-				// Specifying only a name will load the entire icon set
-				// WARNING: This is only suitable for the prototyping phase, as every
-				//          single icon in the set will be included in the final bundle!
-				'pro-light',
+	// Lists the imported icons
+	imports: [
+		{
+			set: '@fortawesome/free-solid-svg-icons',
+			icons: [
+				'faUser',
+				'faFileUpload',
+				'faFrenchFries',
 			]
-		}
-	}
+		},
+		{
+			// You can omit the '@fortawesome/' prefix in the set name
+			set: 'pro-duotone-svg-icons',
+			icons: [
+				// You can omit the 'fa' prefix in the icon names
+				'guitar',
+				'fax',
+				'fastForward',
+
+				// You can also spell the name in kebab case
+				'spider-black-widow',
+
+				// Or with spaces
+				'dumpster fire',
+			]
+		},
+		{
+			// You can also omit the '-svg-icons' suffix
+			set: 'free-brands',
+			icons: [
+				'faVuejs',
+				'creative-commons'
+				'Fort Awesome',
+			]
+		},
+		// Specifying only a name will load the entire icon set
+		// WARNING: This is only suitable for the prototyping phase,
+		//          as every single icon in the set will be included
+		//          in the final bundle!
+		'pro-light',
+	]
 }
 ```
 
@@ -106,11 +106,9 @@ Unfortunately,   Vue  CLI   doesn't   watch  edits   made  on   `vue.config.js`.
 To    get    automatic    rebuilds,    you    can    use    a    watcher    like
 [nodemon](https://www.npmjs.com/package/nodemon):
 ```json
-{
-	"scripts": {
-		"serve": "nodemon --watch vue.config.js --exec npm run serve-vue-cli",
-		"serve-vue-cli": "vue-cli-service serve"
-	}
+"scripts": {
+	"serve": "nodemon --watch vue.config.js --exec npm run serve-vue-cli",
+	"serve-vue-cli": "vue-cli-service serve"
 }
 ```
 Note  that you'll  still  need to  reload  the page  manually  as the  WebSocket
