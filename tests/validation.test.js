@@ -11,6 +11,8 @@ describe('vue-cli-plugin-fontawesome options validation', () => {
 	it("returns an error when there are extra properties on the main options object", () => {
 		expect(validate({ foo: true })).not.to.be.null;
 		expect(validate({ component: 'fa-icon', foo: true })).not.to.be.null;
+
+		expect(validate({})).to.be.null;
 	});
 
 	it("returns an error when the main properties are not the right type", () => {
@@ -32,6 +34,9 @@ describe('vue-cli-plugin-fontawesome options validation', () => {
 		expect(validate({ imports: [{ set: 'pro-solid' }] })).not.to.be.null;
 		expect(validate({ imports: ['pro-duotone', []] })).not.to.be.null;
 		expect(validate({ imports: ['pro-duotone', { icons: [] }] })).not.to.be.null;
+
+		expect(validate({ imports: ['pro-duotone'] })).to.be.null;
+		expect(validate({ imports: [{ set: 'pro-duotone', icons: ['guitar', 'house'] }] })).to.be.null;
 	});
 
 	it("returns an error when a component name is invalid", () => {
@@ -47,7 +52,6 @@ describe('vue-cli-plugin-fontawesome options validation', () => {
 	it("returns an error when a set name is invalid", () => {
 		expect(validate({ imports: ['pro'] })).not.to.be.null;
 		expect(validate({ imports: ['@free-brands'] })).not.to.be.null;
-
 		expect(validate({ imports: [{ set: 'pro', icons: [] }] })).not.to.be.null;
 		expect(validate({ imports: [{ set: '@free-brands', icons: [] }] })).not.to.be.null;
 	});
@@ -56,6 +60,10 @@ describe('vue-cli-plugin-fontawesome options validation', () => {
 		expect(validate({ imports: [{ set: 'pro-regular', icons: ['coffee!'] }] })).not.to.be.null;
 		expect(validate({ imports: [{ set: 'pro-regular', icons: ['question_circle'] }] })).not.to.be.null;
 		expect(validate({ imports: [{ set: 'pro-regular', icons: ['link/external'] }] })).not.to.be.null;
+
+		expect(validate({ imports: [{ set: 'pro-regular', icons: ['coffee'] }] })).to.be.null;
+		expect(validate({ imports: [{ set: 'pro-regular', icons: ['question-circle'] }] })).to.be.null;
+		expect(validate({ imports: [{ set: 'pro-regular', icons: ['link-external'] }] })).to.be.null;
 	});
 
 });
