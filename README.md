@@ -3,6 +3,7 @@
 </p>
 
 <div align="center"><h1>vue-cli-plugin-fontawesome</h1></div>
+
 ![license badge](https://badgen.net/badge/license/ISC/green)
 ![latest release badge](https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green)
 [![codecov badge](https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg)](https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome)
