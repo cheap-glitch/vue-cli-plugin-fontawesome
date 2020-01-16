@@ -2,11 +2,15 @@
 	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/docs/logo-wide.png" alt="logo">
 </p>
 
-<div align="center"><h1>vue-cli-plugin-fontawesome</h1></div>
+<div align="center">
+	<h1>vue-cli-plugin-fontawesome</h1>
+</div>
 
-![license badge](https://badgen.net/badge/license/ISC/green)
-![latest release badge](https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green)
-[![codecov badge](https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg)](https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome)
+<div align="center">
+	<img src="https://badgen.net/badge/license/ISC/green" alt="license badge">
+	<img src="https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="latest release badge">
+	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg" alt="codecov badge"></a>
+</div>
 
 Using [Font Awesome  5](https://fontawesome.com) in a Vue.js  project is already
 pretty simple, but you  still have to work with a  verbose and repetitive syntax
