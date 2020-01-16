@@ -12,6 +12,8 @@
 	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg" alt="codecov badge"></a>
 </div>
 
+<p>&nbsp;</p>
+
 Using [Font Awesome  5](https://fontawesome.com) in a Vue.js  project is already
 pretty simple, but you  still have to work with a  verbose and repetitive syntax
 in order to benefit  from tree-shaking and include only the  needed icons in the
