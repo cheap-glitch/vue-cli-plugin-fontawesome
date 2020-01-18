@@ -6,7 +6,7 @@
 const { expect } = require('chai');
 const validate   = require('../src/validation');
 
-describe('vue-cli-plugin-fontawesome options validation', () => {
+describe('options validation', () => {
 
 	it("returns an error when there are extra properties on the main options object", () => {
 		expect(validate({ foo: true })).not.to.be.null;

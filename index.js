@@ -20,10 +20,10 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-const InjectPlugin     = require('webpack-inject-plugin').default;
+const InjectPlugin       = require('webpack-inject-plugin').default;
 
-const validate         = require('./src/validation');
-const createImportCode = require('./src/imports');
+const validate           = require('./src/validation');
+const generateImportCode = require('./src/imports');
 
 // Inject an instance of the plugin in the webpack config
 module.exports = (_api, _config) => _api.configureWebpack({
@@ -48,6 +48,6 @@ class VueCLIFontAwesomePlugin
 	apply(_compiler)
 	{
 		// Inject the import code before compilation
-		new InjectPlugin(() => createImportCode(this.options)).apply(_compiler);
+		new InjectPlugin(() => generateImportCode(this.options)).apply(_compiler);
 	}
 }

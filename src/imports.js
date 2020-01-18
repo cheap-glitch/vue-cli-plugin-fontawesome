@@ -79,13 +79,13 @@ module.exports = function createImportCode(_options)
 	});
 
 	return `
-		import Vue from 'vue'
-		import { library } from '@fortawesome/fontawesome-svg-core'
-		import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome'
+		import Vue from 'vue';
+		import { library } from '@fortawesome/fontawesome-svg-core';
+		import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome';
+		${imports.join('\n')}
 
 		${components.map(_component => `Vue.component('${componentNames[_component]}', ${_component});` ).join('\n')}
-		${imports.join('\n')}
 		library.add(${registrationList.join(', ')});
 	`
-	.replace(/\t/g, '');
+	.replace(/\t+|  +|\n/g, '');
 }
