@@ -87,5 +87,6 @@ module.exports = function createImportCode(_options)
 		${components.map(_component => `Vue.component('${componentNames[_component]}', ${_component});` ).join('\n')}
 		library.add(${registrationList.join(', ')});
 	`
-	.replace(/\t+|  +|\n/g, '');
+	.replace(/\t+|\n/g, '')
+	.replace(/  +/g,   ' ');
 }
