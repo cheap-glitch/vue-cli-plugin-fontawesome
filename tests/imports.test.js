@@ -136,4 +136,36 @@ describe("import code generation", () => {
 			library.add(fasGuitarElectric);
 		`));
 	});
+
+	it("imports collections of icons", () => {
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['faGuitar', 'guitar-amp', 'bass', 'drum'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitar as fasGuitar, faGuitarAmp as fasGuitarAmp, faBass as fasBass, faDrum as fasDrum } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitar, fasGuitarAmp, fasBass, fasDrum);
+		`));
+	});
+
+	it("imports the same icon from different sets", () => {
+		expect(generate({
+			imports: [
+				{ set: '@fortawesome/pro-solid-svg-icons',    icons: ['guitar'] },
+				{ set: '@fortawesome/pro-regular-svg-icons',  icons: ['guitar'] },
+				{ set: '@fortawesome/pro-duotone-svg-icons',  icons: ['guitar'] },
+				{ set: '@fortawesome/pro-light-svg-icons',    icons: ['guitar'] },
+			],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitar as fasGuitar } from '@fortawesome/pro-solid-svg-icons';
+			import { faGuitar as farGuitar } from '@fortawesome/pro-regular-svg-icons';
+			import { faGuitar as fadGuitar } from '@fortawesome/pro-duotone-svg-icons';
+			import { faGuitar as falGuitar } from '@fortawesome/pro-light-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitar, farGuitar, fadGuitar, falGuitar);
+		`));
+	});
 });
