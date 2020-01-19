@@ -5,7 +5,7 @@
 
 module.exports = function createImportCode(_options)
 {
-	if (_options.imports.length == 0) return '';
+	if (!_options.imports.length) return '';
 
 	// Build the import list for the components
 	const components     = ['FontAwesomeIcon'];

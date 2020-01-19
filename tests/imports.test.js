@@ -22,6 +22,7 @@ const wrapExpected = _str => `
 describe("import code generation", () => {
 
 	it("imports full sets", () => {
+
 		// Full name
 		expect(generate({
 			imports: ['@fortawesome/pro-solid-svg-icons'],
@@ -55,7 +56,7 @@ describe("import code generation", () => {
 			library.add(fas);
 		`));
 
-		// Neither
+		// No prefix + no suffix
 		expect(generate({
 			imports: ['pro-solid'],
 		})).to.equal(wrapExpected(`
@@ -67,4 +68,72 @@ describe("import code generation", () => {
 		`));
 	});
 
+	it("imports single icons", () => {
+
+		// Full name
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['faGuitarElectric'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitarElectric as fasGuitarElectric } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitarElectric);
+		`));
+
+		// No prefix
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['guitarElectric'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitarElectric as fasGuitarElectric } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitarElectric);
+		`));
+
+		// Kebab case
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['fa-guitar-electric'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitarElectric as fasGuitarElectric } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitarElectric);
+		`));
+
+		// Kebab case + no prefix
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['guitar-electric'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitarElectric as fasGuitarElectric } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitarElectric);
+		`));
+
+		// Spaces + no prefix
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['guitar electric'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitarElectric as fasGuitarElectric } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitarElectric);
+		`));
+
+		// Spaces + capitalized + no prefix
+		expect(generate({
+			imports: [{ set: '@fortawesome/pro-solid-svg-icons', icons: ['Guitar Electric'] }],
+		})).to.equal(wrapExpected(`
+			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+			import { faGuitarElectric as fasGuitarElectric } from '@fortawesome/pro-solid-svg-icons';
+
+			Vue.component('fa', FontAwesomeIcon);
+			library.add(fasGuitarElectric);
+		`));
+	});
 });
