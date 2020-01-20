@@ -38,10 +38,7 @@ class VueCLIFontAwesomePlugin
 
 		// Validate the options object and set the defaults
 		if (!validator(this.options))
-		{
-			console.error(`[vue-cli-plugin-fontawesome]: ${ajv.errorsText().replace(/^data/, 'options')}`);
-			process.exit(1);
-		}
+			throw new Error(`[vue-cli-plugin-fontawesome]: ${ajv.errorsText(validator.errors).replace(/^data/, 'options')}`);
 	}
 
 	apply(_compiler)
