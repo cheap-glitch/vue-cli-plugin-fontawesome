@@ -3,67 +3,67 @@
  * tests/validation.test.js
  */
 
-const { expect } = require('chai');
-const validate   = require('../src/validation');
+const { expect    } = require('chai');
+const { validator } = require('../src/validation');
 
 describe('options validation', () => {
 
 	it("returns an error when there are extra properties on the main options object", () => {
-		expect(validate({ foo: true })).not.to.be.null;
-		expect(validate({ component: 'fa-icon', foo: true })).not.to.be.null;
+		expect(validator({ foo: true })).to.be.false;
+		expect(validator({ component: 'fa-icon', foo: true })).to.be.false;
 
-		expect(validate({})).to.be.null;
+		expect(validator({})).to.be.true;
 	});
 
 	it("returns an error when the main properties are not the right type", () => {
 		// Component name
-		expect(validate({ component: 0 })).not.to.be.null;
-		expect(validate({ component: ['fa-icon'] })).not.to.be.null;
+		expect(validator({ component: 0 })).to.be.false;
+		expect(validator({ component: ['fa-icon'] })).to.be.false;
 
 		// Components names
-		expect(validate({ components: 'fa-icon' })).not.to.be.null;
-		expect(validate({ components: ['fa-icon'] })).not.to.be.null;
+		expect(validator({ components: 'fa-icon' })).to.be.false;
+		expect(validator({ components: ['fa-icon'] })).to.be.false;
 
 		// Imports
-		expect(validate({ imports: 'pro-solid' })).not.to.be.null;
-		expect(validate({ imports: {} })).not.to.be.null;
+		expect(validator({ imports: 'pro-solid' })).to.be.false;
+		expect(validator({ imports: {} })).to.be.false;
 	});
 
 	it("returns an error when the imports are invalid", () => {
-		expect(validate({ imports: [{ set: [] }] })).not.to.be.null;
-		expect(validate({ imports: [{ set: 'pro-solid' }] })).not.to.be.null;
-		expect(validate({ imports: ['pro-duotone', []] })).not.to.be.null;
-		expect(validate({ imports: ['pro-duotone', { icons: [] }] })).not.to.be.null;
+		expect(validator({ imports: [{ set: [] }] })).to.be.false;
+		expect(validator({ imports: [{ set: 'pro-solid' }] })).to.be.false;
+		expect(validator({ imports: ['pro-duotone', []] })).to.be.false;
+		expect(validator({ imports: ['pro-duotone', { icons: [] }] })).to.be.false;
 
-		expect(validate({ imports: ['pro-duotone'] })).to.be.null;
-		expect(validate({ imports: [{ set: 'pro-duotone', icons: ['guitar', 'house'] }] })).to.be.null;
+		expect(validator({ imports: ['pro-duotone'] })).to.be.true;
+		expect(validator({ imports: [{ set: 'pro-duotone', icons: ['guitar', 'house'] }] })).to.be.true;
 	});
 
 	it("returns an error when a component name is invalid", () => {
 		// Name isn't a string
-		expect(validate({ components: { icon: 0 } })).not.to.be.null;
-		expect(validate({ components: { icon: ['fa-icon'] } })).not.to.be.null;
+		expect(validator({ components: { icon: 0 } })).to.be.false;
+		expect(validator({ components: { icon: ['fa-icon'] } })).to.be.false;
 
 		// Name contains invalid characters
-		expect(validate({ component: 'fa-icon!' })).not.to.be.null;
-		expect(validate({ components: { icon: '@icon' } })).not.to.be.null;
+		expect(validator({ component: 'fa-icon!' })).to.be.false;
+		expect(validator({ components: { icon: '@icon' } })).to.be.false;
 	});
 
 	it("returns an error when a set name is invalid", () => {
-		expect(validate({ imports: ['pro'] })).not.to.be.null;
-		expect(validate({ imports: ['@free-brands'] })).not.to.be.null;
-		expect(validate({ imports: [{ set: 'pro', icons: [] }] })).not.to.be.null;
-		expect(validate({ imports: [{ set: '@free-brands', icons: [] }] })).not.to.be.null;
+		expect(validator({ imports: ['pro'] })).to.be.false;
+		expect(validator({ imports: ['@free-brands'] })).to.be.false;
+		expect(validator({ imports: [{ set: 'pro', icons: [] }] })).to.be.false;
+		expect(validator({ imports: [{ set: '@free-brands', icons: [] }] })).to.be.false;
 	});
 
 	it("returns an error when an icon name is invalid", () => {
-		expect(validate({ imports: [{ set: 'pro-regular', icons: ['coffee!'] }] })).not.to.be.null;
-		expect(validate({ imports: [{ set: 'pro-regular', icons: ['question_circle'] }] })).not.to.be.null;
-		expect(validate({ imports: [{ set: 'pro-regular', icons: ['link/external'] }] })).not.to.be.null;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['coffee!'] }] })).to.be.false;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['question_circle'] }] })).to.be.false;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['link/external'] }] })).to.be.false;
 
-		expect(validate({ imports: [{ set: 'pro-regular', icons: ['coffee'] }] })).to.be.null;
-		expect(validate({ imports: [{ set: 'pro-regular', icons: ['question-circle'] }] })).to.be.null;
-		expect(validate({ imports: [{ set: 'pro-regular', icons: ['link-external'] }] })).to.be.null;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['coffee'] }] })).to.be.true;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['question-circle'] }] })).to.be.true;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['link-external'] }] })).to.be.true;
 	});
 
 });

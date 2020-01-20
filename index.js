@@ -22,7 +22,7 @@
 
 const InjectPlugin       = require('webpack-inject-plugin').default;
 
-const validate           = require('./src/validation');
+const { ajv, validator } = require('./src/validation');
 const generateImportCode = require('./src/imports');
 
 // Inject an instance of the plugin in the webpack config
@@ -37,10 +37,9 @@ class VueCLIFontAwesomePlugin
 		this.options = _options;
 
 		// Validate the options object and set the defaults
-		const error = validate(this.options);
-		if (error !== null)
+		if (!validator(this.options))
 		{
-			console.error(`[vue-cli-plugin-fontawesome]: ${error.replace(/^data/, 'options')}`);
+			console.error(`[vue-cli-plugin-fontawesome]: ${ajv.errorsText().replace(/^data/, 'options')}`);
 			process.exit(1);
 		}
 	}
