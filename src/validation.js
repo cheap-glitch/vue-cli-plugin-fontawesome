@@ -9,7 +9,9 @@ const patternSetName       = '^(?:@fortawesome/)?(free-(brands|solid)|pro-(duoto
 const patternIconName      = '^[a-zA-Z- ]+$';
 const patternComponentName = '^[a-zA-Z-_]+$';
 
-const schema = {
+const ajv       = new AJV({ useDefaults: true });
+const validator = ajv.compile(
+{
 	type: 'object',
 
 	properties: {
@@ -18,8 +20,9 @@ const schema = {
 		 */
 		component: {
 			type: 'string',
-			pattern: patternComponentName,
 			default: 'fa',
+
+			pattern: patternComponentName,
 		},
 
 		/**
@@ -43,23 +46,22 @@ const schema = {
 					pattern: patternComponentName,
 				}
 			},
-			additionalProperties: false,
+			additionalProperties: false
 		},
 
 		/**
 		 * Imports
 		 */
 		imports: {
-			type: 'array',
+			type: ['array', 'object'],
 			default: [],
 
+			// List of sets + icons
 			items: {
 				type: ['string', 'object'],
 
-				// If the import is a string
 				pattern: patternSetName,
 
-				// If the import is an object
 				properties: {
 					set: {
 						type: 'string',
@@ -76,15 +78,28 @@ const schema = {
 				required: ['set', 'icons'],
 				additionalProperties: false,
 			},
+
+			// Map of icons --> sets
+			patternProperties: {
+				[patternIconName]: {
+					type: ['string', 'array'],
+
+					pattern: patternSetName,
+
+					items: {
+						type: 'string',
+
+						pattern: patternSetName,
+					}
+				}
+			},
+			additionalProperties: false
 		}
 	},
-	additionalProperties: false,
-}
+	additionalProperties: false
+});
 
-const ajv       = new AJV({ useDefaults: true });
-const validator = ajv.compile(schema);
-
-module.exports  = {
+module.exports = {
 	ajv,
 	validator,
 }
