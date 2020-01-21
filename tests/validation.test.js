@@ -25,8 +25,8 @@ describe('options validation', () => {
 		expect(validator({ components: ['fa-icon'] })).to.be.false;
 
 		// Imports
+		expect(validator({ imports: false })).to.be.false;
 		expect(validator({ imports: 'pro-solid' })).to.be.false;
-		expect(validator({ imports: {} })).to.be.false;
 	});
 
 	it("returns an error when the imports are invalid", () => {
