@@ -30,13 +30,22 @@ describe('options validation', () => {
 	});
 
 	it("returns an error when the imports are invalid", () => {
+		// List of sets
 		expect(validator({ imports: [{ set: [] }] })).to.be.false;
 		expect(validator({ imports: [{ set: 'pro-solid' }] })).to.be.false;
 		expect(validator({ imports: ['pro-duotone', []] })).to.be.false;
 		expect(validator({ imports: ['pro-duotone', { icons: [] }] })).to.be.false;
 
+		// List of icons
+		expect(validator({ imports: { guitar: 1 } })).to.be.false;
+		expect(validator({ imports: { guitar: true } })).to.be.false;
+		expect(validator({ imports: { github: { '@fortawesome/free-brands-svg-icons': true } } })).to.be.false;
+
 		expect(validator({ imports: ['pro-duotone'] })).to.be.true;
 		expect(validator({ imports: [{ set: 'pro-duotone', icons: ['guitar', 'house'] }] })).to.be.true;
+		expect(validator({ imports: { guitar: 'pro-regular' } })).to.be.true;
+		expect(validator({ imports: { github: '@fortawesome/free-brands-svg-icons' } })).to.be.true;
+		expect(validator({ imports: { github: ['@fortawesome/free-brands-svg-icons'] } })).to.be.true;
 	});
 
 	it("returns an error when a component name is invalid", () => {
@@ -50,20 +59,34 @@ describe('options validation', () => {
 	});
 
 	it("returns an error when a set name is invalid", () => {
+		// List of sets
 		expect(validator({ imports: ['pro'] })).to.be.false;
 		expect(validator({ imports: ['@free-brands'] })).to.be.false;
 		expect(validator({ imports: [{ set: 'pro', icons: [] }] })).to.be.false;
 		expect(validator({ imports: [{ set: '@free-brands', icons: [] }] })).to.be.false;
+
+		// List of icons
+		expect(validator({ imports: { file: 'pro' } })).to.be.false;
+		expect(validator({ imports: { github: '@free-brands' } })).to.be.false;
 	});
 
 	it("returns an error when an icon name is invalid", () => {
+		// List of sets
 		expect(validator({ imports: [{ set: 'pro-regular', icons: ['coffee!'] }] })).to.be.false;
-		expect(validator({ imports: [{ set: 'pro-regular', icons: ['question_circle'] }] })).to.be.false;
 		expect(validator({ imports: [{ set: 'pro-regular', icons: ['link/external'] }] })).to.be.false;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['question_circle'] }] })).to.be.false;
+
+		// List of icons
+		expect(validator({ imports: { 'coffee!': 'pro-regular' } })).to.be.false;
+		expect(validator({ imports: { 'link/external': 'pro-regular' } })).to.be.false;
+		expect(validator({ imports: { 'question_circle': 'pro-regular' } })).to.be.false;
 
 		expect(validator({ imports: [{ set: 'pro-regular', icons: ['coffee'] }] })).to.be.true;
-		expect(validator({ imports: [{ set: 'pro-regular', icons: ['question-circle'] }] })).to.be.true;
 		expect(validator({ imports: [{ set: 'pro-regular', icons: ['link-external'] }] })).to.be.true;
+		expect(validator({ imports: [{ set: 'pro-regular', icons: ['question-circle'] }] })).to.be.true;
+		expect(validator({ imports: { 'coffee': 'pro-regular' } })).to.be.true;
+		expect(validator({ imports: { 'link-external': 'pro-regular' } })).to.be.true;
+		expect(validator({ imports: { 'question circle': 'pro-regular' } })).to.be.true;
 	});
 
 });
