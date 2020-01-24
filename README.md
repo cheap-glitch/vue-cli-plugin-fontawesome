@@ -21,8 +21,6 @@
  * [Acknowledgements](#acknowledgements)
  * [License](#license)
 
-<p>&nbsp;</p>
-
 Using [Font Awesome  5](https://fontawesome.com) in a Vue.js  project is already
 pretty simple, but you  still have to work with a  verbose and repetitive syntax
 in order to benefit  from tree-shaking and include only the  needed icons in the

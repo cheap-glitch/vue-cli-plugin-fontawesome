@@ -47,15 +47,18 @@ module.exports = function generateImportCode(_options)
 			}
 
 			// Else, build the list of icons to import from the set
-			const icons = _import.icons.map(function(_icon)
+			const icons = _import.icons.map(function(icon)
 			{
-				const iconName = getIconName(_icon);
+				const iconName = getIconName(icon);
 
 				// Add the alias of the icon to the registration list
 				const iconAlias = `${setPrefix}${iconName}`;
 				registrationList.push(iconAlias);
 
-				return `fa${iconName} as ${iconAlias}`;
+				return {
+					name:  iconName,
+					alias: iconAlias,
+				}
 			});
 
 			return { setName, icons };
@@ -64,16 +67,60 @@ module.exports = function generateImportCode(_options)
 	// If the imports are a map of icons to sets
 	else
 	{
-		// Object.keys(_options.imports).forEach(function(_icon)
+		const sets = {};
+
+		// Group the icons by set
+		Object.keys(_options.imports).forEach(function(icon)
+		{
+			const iconName = getIconName(icon);
+
+			// Add the icon to every specified set
+			[..._options.imports[icon]].forEach(function(set)
+			{
+				const setName   = getSetName(set);
+				const setPrefix = getSetPrefix(setName);
+
+				// Add the alias of the icon to the registration list
+				const iconAlias = `${setPrefix}${iconName}`;
+				registrationList.push(iconAlias);
+
+				const icon = {
+					name:  iconName,
+					alias: iconAlias,
+				}
+
+				if (setName in sets)
+					sets[setName].push(icon);
+				else
+					sets[setName] = [icon];
+			});
+		});
+
+		// Generate a list of sets with icons
+		return Object.keys(sets).map(function(set)
+		{
+			return {
+				setName: set,
+				icons:   sets[set],
+			}
+		});
 	}
+
+	// Build the import syntax for the icons
+	const iconsImports = imports.map(function(importObj)
+	{
+		const iconsList = ('icons' in importObj)
+		                ? importObj.icons.map(icon => `fa${icon.name} as ${icon.alias}`).join(', ')
+		                : importObj.setPrefix;
+
+		return `import { ${iconsList} } from '@fortawesome/${importObj.setName}-svg-icons';`
+	});
 
 	return `
 		import Vue from 'vue';
 		import { library } from '@fortawesome/fontawesome-svg-core';
 		import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome';
-		${imports.map(_import =>
-		`import { ${('icons' in _import) ? _import.icons.join(', ') : _import.setPrefix} } from '@fortawesome/${_import.setName}-svg-icons';`
-		).join('\n')}
+		${ iconsImports.join('\n') }
 
 		${components.map(_component => `Vue.component('${componentNames[_component]}', ${_component});` ).join('\n')}
 		library.add(${registrationList.join(', ')});
