@@ -226,10 +226,10 @@ describe("import code generation", () => {
 			import { faLaptop  as farLaptop  } from '@fortawesome/pro-regular-svg-icons';
 			import { faFolders as fadFolders } from '@fortawesome/pro-duotone-svg-icons';
 			import { faCopy    as falCopy    } from '@fortawesome/pro-light-svg-icons';
-			import { faUser    as fasUser    } from '@fortawesome/unknown-set-svg-icons';
+			import { faUser    as faUser     } from '@fortawesome/unknown-set-svg-icons';
 
 			Vue.component('fa', FontAwesomeIcon);
-			library.add(fabTwitter, fasGuitar, farLaptop, fadFolders, falCopy, fasUser);
+			library.add(fabTwitter, fasGuitar, farLaptop, fadFolders, falCopy, faUser);
 		`));
 	});
 });
