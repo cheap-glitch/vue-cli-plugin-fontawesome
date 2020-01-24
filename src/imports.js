@@ -5,7 +5,8 @@
 
 module.exports = function generateImportCode(_options)
 {
-	if (!_options.imports.length) return '';
+	if ((Array.isArray(_options.imports) && !_options.imports.length) || !Object.keys(_options.imports).length)
+		return '';
 
 	// Build the import list for the components
 	const components     = ['FontAwesomeIcon'];
@@ -73,37 +74,36 @@ module.exports = function generateImportCode(_options)
 		Object.keys(_options.imports).forEach(function(icon)
 		{
 			const iconName = getIconName(icon);
+			const iconSets = _options.imports[icon];
 
 			// Add the icon to every specified set
-			[..._options.imports[icon]].forEach(function(set)
-			{
-				const setName   = getSetName(set);
-				const setPrefix = getSetPrefix(setName);
+			(Array.isArray(iconSets) ? iconSets : [iconSets])
+				.forEach(function(set)
+				{
+					const setName   = getSetName(set);
+					const setPrefix = getSetPrefix(setName);
 
-				// Add the alias of the icon to the registration list
-				const iconAlias = `${setPrefix}${iconName}`;
-				registrationList.push(iconAlias);
+					// Add the alias of the icon to the registration list
+					const iconAlias = `${setPrefix}${iconName}`;
+					registrationList.push(iconAlias);
 
-				const icon = {
-					name:  iconName,
-					alias: iconAlias,
-				}
+					const icon = {
+						name:  iconName,
+						alias: iconAlias,
+					}
 
-				if (setName in sets)
-					sets[setName].push(icon);
-				else
-					sets[setName] = [icon];
-			});
+					if (setName in sets)
+						sets[setName].push(icon);
+					else
+						sets[setName] = [icon];
+				});
 		});
 
 		// Generate a list of sets with icons
-		return Object.keys(sets).map(function(set)
-		{
-			return {
-				setName: set,
-				icons:   sets[set],
-			}
-		});
+		imports = Object.keys(sets).map(set => ({
+			setName: set,
+			icons:   sets[set],
+		}));
 	}
 
 	// Build the import syntax for the icons
