@@ -3,7 +3,7 @@
  * src/imports.js
  */
 
-module.exports = function createImportCode(_options)
+module.exports = function generateImportCode(_options)
 {
 	if (!_options.imports.length) return '';
 
