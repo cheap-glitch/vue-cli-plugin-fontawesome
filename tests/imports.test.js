@@ -263,40 +263,56 @@ describe("import code generation", () => {
 		it("imports icons from a single set", () => {
 			expect(generate({
 				imports: {
-					guitar: '@fortawesome/free-solid-svg-icons',
-					folder: 'pro-duotone-svg-icons',
-					github: 'free-brands',
+					faGuitar:            '@fortawesome/free-solid-svg-icons',
+					'folder-music':      'pro-duotone-svg-icons',
+					'creative commons':  'free-brands',
+				}
+			})).to.equal(wrapExpected(`
+				import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+				import { faGuitar          as fasGuitar          } from '@fortawesome/free-solid-svg-icons';
+				import { faFolderMusic     as fadFolderMusic     } from '@fortawesome/pro-duotone-svg-icons';
+				import { faCreativeCommons as fabCreativeCommons } from '@fortawesome/free-brands-svg-icons';
+
+				Vue.component('fa', FontAwesomeIcon);
+				library.add(fasGuitar, fadFolderMusic, fabCreativeCommons);
+			`));
+		});
+
+		it("imports a single icon from multilple sets", () => {
+			expect(generate({
+				imports: {
+					guitar: ['@fortawesome/free-solid-svg-icons', 'pro-duotone-svg-icons', 'pro-light']
 				}
 			})).to.equal(wrapExpected(`
 				import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 				import { faGuitar as fasGuitar } from '@fortawesome/free-solid-svg-icons';
-				import { faFolder as fadFolder } from '@fortawesome/pro-duotone-svg-icons';
-				import { faGithub as fabGithub } from '@fortawesome/free-brands-svg-icons';
+				import { faGuitar as fadGuitar } from '@fortawesome/pro-duotone-svg-icons';
+				import { faGuitar as falGuitar } from '@fortawesome/pro-light-svg-icons';
 
 				Vue.component('fa', FontAwesomeIcon);
-				library.add(fasGuitar, fadFolder, fabGithub);
+				library.add(fasGuitar, fadGuitar, falGuitar);
 			`));
 		});
 
-		it("", () => {
-		});
+		it("imports several icons from multilple sets", () => {
+			expect(generate({
+				imports: {
+					guitar: ['@fortawesome/free-solid-svg-icons', 'pro-duotone-svg-icons', 'pro-light'],
+					bass:   ['@fortawesome/free-solid-svg-icons', 'pro-duotone-svg-icons', 'pro-light'],
+				}
+			})).to.equal(wrapExpected(`
+				import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-		it("", () => {
-		});
+				import { faGuitar as fasGuitar, faBass as fasBass } from '@fortawesome/free-solid-svg-icons';
+				import { faGuitar as fadGuitar, faBass as fadBass } from '@fortawesome/pro-duotone-svg-icons';
+				import { faGuitar as falGuitar, faBass as falBass } from '@fortawesome/pro-light-svg-icons';
 
-		it("", () => {
+				Vue.component('fa', FontAwesomeIcon);
+				library.add(fasGuitar, fadGuitar, falGuitar, fasBass, fadBass, falBass);
+			`));
 		});
-
-		it("", () => {
-		});
-
-		it("", () => {
-		});
-
-		it("", () => {
-		});
-
 	});
 	/**
 	 * }}}
