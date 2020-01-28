@@ -26,24 +26,24 @@ const { ajv, validator } = require('./src/validation');
 const generateImportCode = require('./src/imports');
 
 // Inject an instance of the plugin in the webpack config
-module.exports = (_api, _config) => _api.configureWebpack({
-	plugins: [new VueCLIFontAwesomePlugin(_config.pluginOptions.fontawesome || _config.fontawesome || {})]
+module.exports = (api, config) => api.configureWebpack({
+	plugins: [new VueCLIFontAwesomePlugin(config.pluginOptions.fontawesome || config.fontawesome || {})]
 });
 
 class VueCLIFontAwesomePlugin
 {
-	constructor(_options)
+	constructor(options)
 	{
-		this.options = _options;
+		this.options = options;
 
 		// Validate the options object and set the defaults
 		if (!validator(this.options))
 			throw new Error(`[vue-cli-plugin-fontawesome]: ${ajv.errorsText(validator.errors).replace(/^data/, 'options')}`);
 	}
 
-	apply(_compiler)
+	apply(compiler)
 	{
 		// Inject the import code before compilation
-		new InjectPlugin(() => generateImportCode(this.options)).apply(_compiler);
+		new InjectPlugin(() => generateImportCode(this.options)).apply(compiler);
 	}
 }

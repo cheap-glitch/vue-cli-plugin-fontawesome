@@ -47,11 +47,11 @@ module.exports = [{
 		},
 	],
 
-	filter(_input)
+	filter(input)
 	{
 		// Remove the free solid set if the pro one is also selected
-		return (_input.includes('free-solid') && _input.includes('pro-solid'))
-			? _input.filter(_v => _v !== 'free-solid')
-			: _input;
+		return (input.includes('free-solid') && input.includes('pro-solid'))
+			? input.filter(v => v !== 'free-solid')
+			: input;
 	},
 }];

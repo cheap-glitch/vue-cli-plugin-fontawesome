@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/cheap-glitch/vue-cli-plugin-fontawesome/issues"
   },
-  "author": "cheap-glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
+  "author": "cheap glitch <cheap.glitch@gmail.com> (https://github.com/cheap-glitch)",
   "homepage": "https://github.com/cheap-glitch/vue-cli-plugin-fontawesome#readme",
   "keywords": [
     "vue",
@@ -22,11 +22,11 @@
   ],
   "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "test"
   },
   "scripts": {
-    "lint": "eslint *.js src/*.js tests/*.js",
-    "test": "mocha --diff --inline-diffs tests/*.test.js",
+    "lint": "eslint '**/*.js'",
+    "test": "mocha",
     "coverage": "nyc npm test",
     "report-coverage": "npm run coverage && nyc report --reporter=text-lcov | codecov --pipe"
   },

@@ -9,11 +9,11 @@ const generateImportCode = require('../src/imports');
 /**
  * Helper functions
  */
-const generate     = _options => generateImportCode({ component: 'fa', components: {}, ..._options});
-const wrapExpected = _str => `
+const generate     = options => generateImportCode({ component: 'fa', components: {}, ...options});
+const wrapExpected = str => `
 	import Vue from 'vue';
 	import { library } from '@fortawesome/fontawesome-svg-core';
-	${_str}`
+	${str}`
 	.replace(/\t+|\n/g, '')
 	.replace(/  +/g,   ' ');
 

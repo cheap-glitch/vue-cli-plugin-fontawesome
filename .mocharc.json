@@ -1,7 +1,5 @@
 {
-  "diff":          true,
-  "inline-diffs":  true,
-  "extension":     ["js"],
-  "package":       "./package.json",
-  "reporter":      "spec"
+	"bail":        true,
+	"diff":        true,
+	"inline-diff": true
 }

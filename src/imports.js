@@ -3,27 +3,27 @@
  * src/imports.js
  */
 
-module.exports = function generateImportCode(_options)
+module.exports = function generateImportCode(options)
 {
-	if ((Array.isArray(_options.imports) && !_options.imports.length) || !Object.keys(_options.imports).length)
+	if ((Array.isArray(options.imports) && !options.imports.length) || !Object.keys(options.imports).length)
 		return '';
 
 	// Build the import list for the components
 	const components     = ['FontAwesomeIcon'];
-	const componentNames = { FontAwesomeIcon: _options.component };
-	if ('icon' in _options.components)
+	const componentNames = { FontAwesomeIcon: options.component };
+	if ('icon' in options.components)
 	{
-		componentNames.FontAwesomeIcon = _options.components.icon;
+		componentNames.FontAwesomeIcon = options.components.icon;
 	}
-	if ('layers' in _options.components)
+	if ('layers' in options.components)
 	{
 		components.push('FontAwesomeLayers');
-		componentNames.FontAwesomeLayers = _options.components.layers;
+		componentNames.FontAwesomeLayers = options.components.layers;
 	}
-	if ('layersText' in _options.components)
+	if ('layersText' in options.components)
 	{
 		components.push('FontAwesomeLayersText');
-		componentNames.FontAwesomeLayersText = _options.components.layersText;
+		componentNames.FontAwesomeLayersText = options.components.layersText;
 	}
 
 	// List of all the icons to import, grouped by sets
@@ -32,15 +32,15 @@ module.exports = function generateImportCode(_options)
 	const registrationList = [];
 
 	// If the imports are a list of sets with their icons
-	if (Array.isArray(_options.imports))
+	if (Array.isArray(options.imports))
 	{
-		imports = _options.imports.map(function(_import)
+		imports = options.imports.map(function(importItem)
 		{
-			const setName   = getSetName(typeof _import == 'string' ? _import : _import.set)
+			const setName   = getSetName(typeof importItem == 'string' ? importItem : importItem.set)
 			const setPrefix = getSetPrefix(setName);
 
 			// If the import is a string, import and register the entire icon set
-			if (typeof _import == 'string')
+			if (typeof importItem == 'string')
 			{
 				registrationList.push(setPrefix);
 
@@ -48,7 +48,7 @@ module.exports = function generateImportCode(_options)
 			}
 
 			// Else, build the list of icons to import from the set
-			const icons = _import.icons.map(function(icon)
+			const icons = importItem.icons.map(function(icon)
 			{
 				const iconName = getIconName(icon);
 
@@ -71,10 +71,10 @@ module.exports = function generateImportCode(_options)
 		const sets = {};
 
 		// Group the icons by set
-		Object.keys(_options.imports).forEach(function(icon)
+		Object.keys(options.imports).forEach(function(icon)
 		{
 			const iconName = getIconName(icon);
-			const iconSets = _options.imports[icon];
+			const iconSets = options.imports[icon];
 
 			// Add the icon to every specified set
 			(Array.isArray(iconSets) ? iconSets : [iconSets])
@@ -122,7 +122,7 @@ module.exports = function generateImportCode(_options)
 		import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome';
 		${ iconsImports.join('\n') }
 
-		${components.map(_component => `Vue.component('${componentNames[_component]}', ${_component});` ).join('\n')}
+		${components.map(component => `Vue.component('${componentNames[component]}', ${component});` ).join('\n')}
 		library.add(${registrationList.join(', ')});
 	`
 	.replace(/\t+|\n/g, '')
@@ -135,13 +135,13 @@ function getIconName(icon)
 	return (icon.includes(' ') ? icon.replace(/ +/g, '-').toLowerCase() : icon)
 
 		// Convert kebab case names to camel case
-		.replace(/-[a-z]/g, _match => _match.slice(1).toUpperCase())
+		.replace(/-[a-z]/g, match => match.slice(1).toUpperCase())
 
 		// Remove a potential 'fa' prefix from the provided name
 		.replace(/^fa([A-Z])/, '$1')
 
 		// Make sure the first letter is uppercase
-		.replace(/^\S/, _letter => _letter.toUpperCase());
+		.replace(/^\S/, letter => letter.toUpperCase());
 }
 
 function getSetName(importSetName)
