@@ -17,6 +17,7 @@
  * [Installation](#installation)
  * [Usage](#usage)
    * [Automatically rebuild when `vue.config.js` is modified](#automatically-rebuild-when-vueconfigjs-is-modified)
+   * [Alternative import syntax](#alternative-import-syntax)
  * [Changelog](#changelog)
  * [Acknowledgements](#acknowledgements)
  * [License](#license)
@@ -114,8 +115,24 @@ fontawesome: {
 You can then  use the Font Awesome components in your templates.  For more info,
 see [here](https://github.com/FortAwesome/vue-fontawesome#usage).
 
-#### Automatically rebuild when `vue.config.js` is modified
+#### Alternative import syntax
+If you prefer to have all the icons  in one list, you can list the imports using
+a hash map instead of a list sorted by set:
+```javascript
+// vue.config.js
 
+fontawesome: {
+	imports: {
+		// Import an icon from a single set
+		github: 'free-brands',
+
+		// Import the same icon from several sets
+		userRobot: ['pro-light', 'pro-duotone'],
+	}
+}
+```
+
+#### Automatically rebuild when `vue.config.js` is modified
 Unfortunately,   Vue  CLI   doesn't   watch  edits   made  on   `vue.config.js`.
 To    get    automatic    rebuilds,    you    can    use    a    watcher    like
 [nodemon](https://www.npmjs.com/package/nodemon):
