@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/docs/logo-wide.png" alt="logo">
+	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/docs/banner.png" alt="banner">
 </p>
 
 <div align="center">
@@ -12,8 +12,7 @@
 	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg" alt="codecov badge"></a>
 </div>
 
-<p>&nbsp;</p>
-
+#### Table of contents
  * [Installation](#installation)
  * [Usage](#usage)
    * [Automatically rebuild when `vue.config.js` is modified](#automatically-rebuild-when-vueconfigjs-is-modified)
