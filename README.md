@@ -15,8 +15,8 @@
 #### Table of contents
  * [Installation](#installation)
  * [Usage](#usage)
-   * [Automatically rebuild when `vue.config.js` is modified](#automatically-rebuild-when-vueconfigjs-is-modified)
    * [Alternative import syntax](#alternative-import-syntax)
+   * [Automatically rebuild when `vue.config.js` is modified](#automatically-rebuild-when-vueconfigjs-is-modified)
  * [Changelog](#changelog)
  * [Acknowledgements](#acknowledgements)
  * [License](#license)
