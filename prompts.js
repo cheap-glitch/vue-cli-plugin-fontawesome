@@ -9,8 +9,7 @@ module.exports = [{
 
 	pageSize: 8,
 
-	message: 'Which icon sets do you want to use?\n'
-	       + ' (Note: you can always add more later by manually adding them to the dependencies in package.json)\n',
+	message: 'Select some icon sets to install',
 
 	choices: [
 		{
