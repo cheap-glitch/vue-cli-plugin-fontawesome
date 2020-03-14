@@ -7,7 +7,7 @@
 </div>
 
 <div align="center">
-	<img src="https://badgen.net/badge/license/ISC/green" alt="license badge">
+	<img src="https://badgen.net/github/license/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="license badge">
 	<img src="https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="latest release badge">
 	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg" alt="codecov badge"></a>
 </div>
