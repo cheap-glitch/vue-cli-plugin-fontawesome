@@ -37,7 +37,7 @@ describe("import code generation", () => {
 		// Just the icon component
 		expect(generate({
 			component: 'font-awesome-icon',
-			imports: ['@fortawesome/pro-solid-svg-icons'],
+			imports:   ['@fortawesome/pro-solid-svg-icons'],
 		})).to.equal(wrapExpected(`
 			import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 			import { fas } from '@fortawesome/pro-solid-svg-icons';
