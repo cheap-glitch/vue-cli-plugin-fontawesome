@@ -27,7 +27,7 @@ const generateImportCode = require('./src/imports');
 
 // Inject an instance of the plugin in the webpack config
 module.exports = (api, config) => api.configureWebpack({
-	plugins: [new VueCLIFontAwesomePlugin(config.pluginOptions.fontawesome || config.fontawesome || {})]
+	plugins: [new VueCLIFontAwesomePlugin(config ? config.pluginOptions ? (config.pluginOptions.fontawesome || {}) : {} : {})]
 });
 
 class VueCLIFontAwesomePlugin
