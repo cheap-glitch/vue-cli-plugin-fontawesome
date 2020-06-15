@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://raw.githubusercontent.com/cheap-glitch/vue-cli-plugin-fontawesome/master/docs/banner.png" alt="banner">
+	<img src="./docs/banner.png" alt="banner">
 </p>
 
 <div align="center">
@@ -9,7 +9,7 @@
 <div align="center">
 	<img src="https://badgen.net/github/license/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="license badge">
 	<img src="https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="latest release badge">
-	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/master/graph/badge.svg" alt="codecov badge"></a>
+	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/main/graph/badge.svg" alt="codecov badge"></a>
 </div>
 
 #### Table of contents
