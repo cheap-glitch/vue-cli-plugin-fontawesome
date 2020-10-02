@@ -30,10 +30,8 @@ module.exports = (api, config) => api.configureWebpack({
 	plugins: [new VueCLIFontAwesomePlugin(config ? config.pluginOptions ? (config.pluginOptions.fontawesome || {}) : {} : {})]
 });
 
-class VueCLIFontAwesomePlugin
-{
-	constructor(options)
-	{
+class VueCLIFontAwesomePlugin {
+	constructor(options) {
 		this.options = options;
 
 		// Validate the options object and set the defaults
@@ -41,8 +39,7 @@ class VueCLIFontAwesomePlugin
 			throw new Error(`[vue-cli-plugin-fontawesome]: ${ajv.errorsText(validator.errors).replace(/^data/, 'options')}`);
 	}
 
-	apply(compiler)
-	{
+	apply(compiler) {
 		// Inject the import code before compilation
 		new InjectPlugin(() => generateImportCode(this.options)).apply(compiler);
 	}

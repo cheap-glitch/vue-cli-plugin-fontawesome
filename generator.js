@@ -1,11 +1,5 @@
-
-/**
- * vue-cli-plugin-fontawesome/generator.js
- */
-
 // Insert the needed and optional dependencies into package.json
-module.exports = function(api, options)
-{
+module.exports = function(api, options) {
 	const dependencies = {
 		'@fortawesome/vue-fontawesome':      '^0.1.9',
 		'@fortawesome/fontawesome-svg-core': '^1.2.28',

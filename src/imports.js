@@ -1,27 +1,18 @@
-
-/**
- * src/imports.js
- */
-
-module.exports = function generateImportCode(options)
-{
+module.exports = function generateImportCode(options) {
 	if ((Array.isArray(options.imports) && !options.imports.length) || !Object.keys(options.imports).length)
 		return '';
 
 	// Build the import list for the components
 	const components     = ['FontAwesomeIcon'];
 	const componentNames = { FontAwesomeIcon: options.component };
-	if ('icon' in options.components)
-	{
+	if ('icon' in options.components) {
 		componentNames.FontAwesomeIcon = options.components.icon;
 	}
-	if ('layers' in options.components)
-	{
+	if ('layers' in options.components) {
 		components.push('FontAwesomeLayers');
 		componentNames.FontAwesomeLayers = options.components.layers;
 	}
-	if ('layersText' in options.components)
-	{
+	if ('layersText' in options.components) {
 		components.push('FontAwesomeLayersText');
 		componentNames.FontAwesomeLayersText = options.components.layersText;
 	}
@@ -32,24 +23,20 @@ module.exports = function generateImportCode(options)
 	const registrationList = [];
 
 	// If the imports are a list of sets with their icons
-	if (Array.isArray(options.imports))
-	{
-		imports = options.imports.map(function(importItem)
-		{
+	if (Array.isArray(options.imports)) {
+		imports = options.imports.map(function(importItem) {
 			const setName   = getSetName(typeof importItem == 'string' ? importItem : importItem.set)
 			const setPrefix = getSetPrefix(setName);
 
 			// If the import is a string, import and register the entire icon set
-			if (typeof importItem == 'string')
-			{
+			if (typeof importItem == 'string') {
 				registrationList.push(setPrefix);
 
 				return { setName, setPrefix };
 			}
 
 			// Else, build the list of icons to import from the set
-			const icons = importItem.icons.map(function(icon)
-			{
+			const icons = importItem.icons.map(function(icon) {
 				const iconName = getIconName(icon);
 
 				// Add the alias of the icon to the registration list
@@ -64,22 +51,18 @@ module.exports = function generateImportCode(options)
 
 			return { setName, icons };
 		});
-	}
 	// If the imports are a map of icons to sets
-	else
-	{
+	} else {
 		const sets = {};
 
 		// Group the icons by set
-		Object.keys(options.imports).forEach(function(icon)
-		{
+		Object.keys(options.imports).forEach(function(icon) {
 			const iconName = getIconName(icon);
 			const iconSets = options.imports[icon];
 
 			// Add the icon to every specified set
 			(Array.isArray(iconSets) ? iconSets : [iconSets])
-				.forEach(function(set)
-				{
+				.forEach(function(set) {
 					const setName   = getSetName(set);
 					const setPrefix = getSetPrefix(setName);
 
@@ -107,8 +90,7 @@ module.exports = function generateImportCode(options)
 	}
 
 	// Build the import syntax for the icons
-	const iconsImports = imports.map(function(importObj)
-	{
+	const iconsImports = imports.map(function(importObj) {
 		const iconsList = ('icons' in importObj)
 		                ? importObj.icons.map(icon => `fa${icon.name} as ${icon.alias}`).join(', ')
 		                : importObj.setPrefix;
@@ -129,8 +111,7 @@ module.exports = function generateImportCode(options)
 	.replace(/  +/g,   ' ');
 }
 
-function getIconName(icon)
-{
+function getIconName(icon) {
 	// If the name has spaces in it, convert it to valid kebab case
 	return (icon.includes(' ') ? icon.replace(/ +/g, '-').toLowerCase() : icon)
 
@@ -144,15 +125,12 @@ function getIconName(icon)
 		.replace(/^\S/, letter => letter.toUpperCase());
 }
 
-function getSetName(importSetName)
-{
+function getSetName(importSetName) {
 	return importSetName.replace(/(^@fortawesome\/|-svg-icons$)/g, '');
 }
 
-function getSetPrefix(setName)
-{
-	switch (setName)
-	{
+function getSetPrefix(setName) {
+	switch (setName) {
 		case 'free-brands':  return 'fab';
 		case 'free-solid':   return 'fas';
 		case 'pro-duotone':  return 'fad';

@@ -1,8 +1,3 @@
-
-/**
- * tests/validation.test.js
- */
-
 const { expect    } = require('chai');
 const { validator } = require('../src/validation');
 

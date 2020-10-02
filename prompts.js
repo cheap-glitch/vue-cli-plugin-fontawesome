@@ -1,8 +1,3 @@
-
-/**
- * vue-cli-plugin-fontawesome/prompts.js
- */
-
 module.exports = [{
 	type: 'checkbox',
 	name: 'iconSets',
@@ -46,8 +41,7 @@ module.exports = [{
 		},
 	],
 
-	filter(input)
-	{
+	filter(input) {
 		// Remove the free solid set if the pro one is also selected
 		return (input.includes('free-solid') && input.includes('pro-solid'))
 			? input.filter(v => v !== 'free-solid')

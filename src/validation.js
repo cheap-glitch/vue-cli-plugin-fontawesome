@@ -1,8 +1,3 @@
-
-/**
- * src/validation.js
- */
-
 const AJV = require('ajv');
 
 const patternSetName       = '^(?:@fortawesome/)?(free-(brands|solid)|pro-(duotone|light|regular|solid))(?:-svg-icons)?$';

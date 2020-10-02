@@ -1,8 +1,3 @@
-
-/**
- * tests/imports.test.js
- */
-
 const { expect }         = require('chai');
 const generateImportCode = require('../src/imports');
 
