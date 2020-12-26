@@ -7,12 +7,13 @@
 </div>
 
 <div align="center">
-	<img src="https://badgen.net/github/license/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="license badge">
-	<img src="https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="latest release badge">
-	<a href="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome"><img src="https://codecov.io/gh/cheap-glitch/vue-cli-plugin-fontawesome/branch/main/graph/badge.svg" alt="codecov badge"></a>
+	<img src="https://badgen.net/github/license/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="License">
+	<img src="https://badgen.net/github/release/cheap-glitch/vue-cli-plugin-fontawesome?color=green" alt="Latest release">
+	<a href="https://coveralls.io/github/cheap-glitch/vue-cli-plugin-fontawesome?branch=main"><img src="https://coveralls.io/repos/github/cheap-glitch/vue-cli-plugin-fontawesome/badge.svg?branch=main" alt="Coverage status"></a>
 </div>
 
 #### Table of contents
+
  * [Installation](#installation)
  * [Usage](#usage)
    * [Alternative import syntax](#alternative-import-syntax)
@@ -45,10 +46,10 @@ No other file will be modified during the installation process.
 
 > Note: if you want to install pro icon sets, make sure you have a `.npmrc` file
 > at the root of your project with  your token in it, otherwise the installation
-> will fail (cf. ["Installing the Pro version of Font
-> Awesome"](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers#installing-pro)).
+> will fail (cf. ["Installing the Pro version of Font Awesome"](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers#installing-pro)).
 
 ## Usage
+
 ```javascript
 // vue.config.js
 
@@ -115,6 +116,7 @@ You can then  use the Font Awesome components in your templates.  For more info,
 see [here](https://github.com/FortAwesome/vue-fontawesome#usage).
 
 #### Alternative import syntax
+
 If you prefer to have all the icons  in one list, you can list the imports using
 a hash map instead of a list sorted by set:
 ```javascript
@@ -132,6 +134,7 @@ fontawesome: {
 ```
 
 #### Automatically rebuild when `vue.config.js` is modified
+
 Unfortunately,   Vue  CLI   doesn't   watch  edits   made  on   `vue.config.js`.
 To    get    automatic    rebuilds,    you    can    use    a    watcher    like
 [nodemon](https://www.npmjs.com/package/nodemon):
@@ -145,12 +148,15 @@ Note  that you'll  still  need to  reload  the page  manually  as the  WebSocket
 connection with the local server will be lost.
 
 ## Changelog
+
 See the full changelog [here](https://github.com/cheap-glitch/vue-cli-plugin-fontawesome/releases).
 
 ## Acknowledgements
+
 This plugin depends on the awesome [webpack-inject-plugin](https://github.com/adierkens/webpack-inject-plugin).
 
 This plugin is heavily inspired by its Nuxt.js counterpart, [nuxt-fontawesome](https://github.com/vaso2/nuxt-fontawesome).
 
 ## License
+
 This software is distributed under the ISC license.

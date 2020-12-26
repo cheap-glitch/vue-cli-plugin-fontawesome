@@ -1,22 +1,22 @@
 {
+
 	"root": true,
+
+	"extends": "eslint:recommended",
 
 	"parserOptions": {
 		"sourceType": "module",
 		"ecmaVersion": 2018
 	},
 
+	"env": {
+		"es6":  true,
+		"node": true
+	},
+
 	"plugins": [
 		"smarter-tabs"
 	],
-
-	"env": {
-		"es6":      true,
-		"node":     true,
-		"browser":  true
-	},
-
-	"extends": "eslint:recommended",
 
 	"rules": {
     "brace-style":               ["warn", "1tbs", { "allowSingleLine": true }],
@@ -25,9 +25,10 @@
 	},
 
 	"overrides": [{
-		"files": ["test/*.test.js", "tests/unit/*.spec.js"],
+		"files": ["test/*.test.js"],
 		"env": {
-			"mocha": true
+			"jest": true
 		}
 	}]
+
 }

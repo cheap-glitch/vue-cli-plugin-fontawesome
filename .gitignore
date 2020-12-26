@@ -1,12 +1,8 @@
-
-#
-# .gitignore
-#
-
-# NPM
+# npm
 /node_modules/
+/.npmrc
 npm-debug.log
 
 # Code coverage
-/.codecov.yml
-/.nyc_output/
+/.coverage
+/.coveralls.yml
