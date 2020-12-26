@@ -1,11 +1,9 @@
-
 /**
  * vue-cli-plugin-fontawesome
  *
  * A tiny Vue CLI plugin to import Font Awesome icons handily.
  *
  * Copyright (c) 2019-present, cheap glitch
- *
  *
  * Permission  to use,  copy, modify,  and/or distribute  this software  for any
  * purpose  with or  without  fee is  hereby granted,  provided  that the  above
@@ -20,7 +18,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-const InjectPlugin       = require('webpack-inject-plugin').default;
+const InjectPlugin = require('webpack-inject-plugin').default;
 
 const { ajv, validator } = require('./src/validation');
 const generateImportCode = require('./src/imports');
@@ -35,8 +33,9 @@ class VueCLIFontAwesomePlugin {
 		this.options = options;
 
 		// Validate the options object and set the defaults
-		if (!validator(this.options))
+		if (!validator(this.options)) {
 			throw new Error(`[vue-cli-plugin-fontawesome]: ${ajv.errorsText(validator.errors).replace(/^data/, 'options')}`);
+		}
 	}
 
 	apply(compiler) {

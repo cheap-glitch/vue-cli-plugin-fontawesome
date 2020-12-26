@@ -1,32 +1,25 @@
-const AJV = require('ajv');
+const AJV = require('ajv').default;
 
 const patternSetName       = '^(?:@fortawesome/)?(free-(brands|solid)|pro-(duotone|light|regular|solid))(?:-svg-icons)?$';
 const patternIconName      = '^[a-zA-Z- ]+$';
 const patternComponentName = '^[a-zA-Z-_]+$';
 
-const ajv       = new AJV({ useDefaults: true });
-const validator = ajv.compile(
-{
+const ajv = new AJV({ useDefaults: true, allowUnionTypes: true });
+const validator = ajv.compile({
 	type: 'object',
 
 	properties: {
-		/**
-		 * Name of the icon component
-		 */
+		// Name of the icon component
 		component: {
 			type: 'string',
 			default: 'fa',
-
 			pattern: patternComponentName,
 		},
 
-		/**
-		 * Names of all the components
-		 */
+		// Names of all the components
 		components: {
 			type: 'object',
 			default: {},
-
 			properties: {
 				icon: {
 					type: 'string',
@@ -44,19 +37,15 @@ const validator = ajv.compile(
 			additionalProperties: false
 		},
 
-		/**
-		 * Imports
-		 */
+		// Imports
 		imports: {
 			type: ['array', 'object'],
 			default: [],
 
-			// List of sets + icons
+			// List of sets and icons
 			items: {
 				type: ['string', 'object'],
-
 				pattern: patternSetName,
-
 				properties: {
 					set: {
 						type: 'string',
@@ -74,16 +63,13 @@ const validator = ajv.compile(
 				additionalProperties: false,
 			},
 
-			// Map of icons --> sets
+			// Map of icons to sets
 			patternProperties: {
 				[patternIconName]: {
 					type: ['string', 'array'],
-
 					pattern: patternSetName,
-
 					items: {
 						type: 'string',
-
 						pattern: patternSetName,
 					}
 				}

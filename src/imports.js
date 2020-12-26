@@ -1,6 +1,7 @@
 module.exports = function generateImportCode(options) {
-	if ((Array.isArray(options.imports) && !options.imports.length) || !Object.keys(options.imports).length)
+	if ((Array.isArray(options.imports) && !options.imports.length) || !Object.keys(options.imports).length) {
 		return '';
+	}
 
 	// Build the import list for the components
 	const components     = ['FontAwesomeIcon'];
@@ -61,25 +62,25 @@ module.exports = function generateImportCode(options) {
 			const iconSets = options.imports[icon];
 
 			// Add the icon to every specified set
-			(Array.isArray(iconSets) ? iconSets : [iconSets])
-				.forEach(function(set) {
-					const setName   = getSetName(set);
-					const setPrefix = getSetPrefix(setName);
+			(Array.isArray(iconSets) ? iconSets : [iconSets]).forEach(function(set) {
+				const setName   = getSetName(set);
+				const setPrefix = getSetPrefix(setName);
 
-					// Add the alias of the icon to the registration list
-					const iconAlias = `${setPrefix}${iconName}`;
-					registrationList.push(iconAlias);
+				// Add the alias of the icon to the registration list
+				const iconAlias = `${setPrefix}${iconName}`;
+				registrationList.push(iconAlias);
 
-					const icon = {
-						name:  iconName,
-						alias: iconAlias,
-					}
+				const icon = {
+					name:  iconName,
+					alias: iconAlias,
+				}
 
-					if (setName in sets)
-						sets[setName].push(icon);
-					else
-						sets[setName] = [icon];
-				});
+				if (setName in sets) {
+					sets[setName].push(icon);
+				} else {
+					sets[setName] = [icon];
+				}
+			});
 		});
 
 		// Generate a list of sets with icons
@@ -98,17 +99,14 @@ module.exports = function generateImportCode(options) {
 		return `import { ${iconsList} } from '@fortawesome/${importObj.setName}-svg-icons';`
 	});
 
-	return `
-		import Vue from 'vue';
+	return `import Vue from 'vue';
 		import { library } from '@fortawesome/fontawesome-svg-core';
 		import { ${components.join(', ')} } from '@fortawesome/vue-fontawesome';
 		${ iconsImports.join('\n') }
 
 		${components.map(component => `Vue.component('${componentNames[component]}', ${component});` ).join('\n')}
 		library.add(${registrationList.join(', ')});
-	`
-	.replace(/\t+|\n/g, '')
-	.replace(/  +/g,   ' ');
+	`.replace(/\t+|\n/g, '').replace(/  +/g,   ' ');
 }
 
 function getIconName(icon) {
